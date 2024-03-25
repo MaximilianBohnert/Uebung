@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+# Datei an anderen Raspberry Pi im gleichen Netzwerk versenden
+scp /home/lorenz.oliver.a21/DateiVersenden mmb@172.20.10.9:/home/mmb/Uebung
+
+scp test_datei lorenz.oliver.a21@172.20.10.5:/home/lorenz.oliver.a21
