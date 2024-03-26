@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+
+import RPi.GPIO as GPIO
+import time
+PIN_A = 5
+PIN_B = 6
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(PIN_A, GPIO.IN)
+GPIO.setup(PIN_B, GPIO.IN)
+while True:
+	
+        if GPIO.input(PIN_A) == GPIO.HIGH and GPIO.input(PIN_B) == GPIO.LOW:
+
+            print("links drehn")
+        elif GPIO.input(PIN_A) == GPIO.LOW and GPIO.input(PIN_B) == GPIO.HIGH:
+            print("rechts drehen")
+        else:
+            print("........")
+
+        time.sleep(0.01)
