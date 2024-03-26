@@ -1,0 +1,23 @@
+#!/bin/bash
+
+taster=13
+LED=16
+if ! test -d "/sys/class/gpio/gpio$taster"; then
+	echo $taster > "/sys/class/gpio/export";
+fi
+
+echo "in" > "/sys/class/gpio/gpio$taster/direction"
+
+if ! test -d "/sys/class/gpio/gpio$LED"; then
+	echo $LED > "/sys/class/gpio/export";
+fi
+
+echo "out" > "/sys/class/gpio/gpio$LED/direction"
+
+while true; do
+	if test `cat "/sys/class/gpio/gpio$taster/value"` -eq 1;
+	then cat /sys/bus/w1/devices/28-00000a54f0d1/w1_slave |tail -n1 |awk ' {print $10}' |sed 's/.=\([0-9]\{2\}\)\([0-9]\{3\}\)/Temperatur: \1.\2°C/';
+	fi
+	cat /sys/class/gpio/gpio13/value > /sys/class/gpio/gpio16/value;
+	sleep 0.01;
+done
